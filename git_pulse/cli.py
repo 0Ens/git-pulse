@@ -5,7 +5,7 @@ from rich.table import Table
 from rich import box
 
 from git_pulse.config import ConfigManager
-from git_pulse.scanner import find_git_repos
+from git_pulse.scanner import RepoScanner
 from git_pulse.analyzer import analyze_repo
 
 app = typer.Typer(
@@ -38,7 +38,7 @@ def scan(
     console.print(f"[dim]Ignoring: {', '.join(ignored) if ignored else 'nothing'}[/dim]\n")
 
     with console.status("[bold green]Repos aranıyor...[/bold green]"):
-        repos = find_git_repos(directory, ignored)
+        repos = RepoScanner(directory, ignored).scan()
 
     if not repos:
         console.print("[yellow]Hiç git reposu bulunamadı.[/yellow]")
@@ -107,3 +107,7 @@ def ignore_remove(folder: str = typer.Argument(..., help="Folder name to stop ig
 
 def main():
     app()
+
+
+if __name__ == "__main__":
+    main()
