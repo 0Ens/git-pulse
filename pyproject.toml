@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "git-pulse"
+version = "0.1.0"
+description = "The heartbeat of your local development environment"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.9.4",
+    "rich>=13.0",
+]
+
+[project.scripts]
+git-pulse = "git_pulse.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["git_pulse*"]
